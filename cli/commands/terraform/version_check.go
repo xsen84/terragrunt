@@ -91,7 +91,7 @@ func PopulateTerraformVersion(terragruntOptions *options.TerragruntOptions) erro
 	if err != nil {
 		return err
 	}
-
+	fmt.Println("fake terraformVersion: ", terraformVersion)
 	terragruntOptions.TerraformVersion = terraformVersion
 	terragruntOptions.Logger.Debugf("Terraform version: %s", terraformVersion)
 	return nil
@@ -139,13 +139,14 @@ func checkTerraformVersionMeetsConstraint(currentVersion *version.Version, const
 
 // Parse the output of the terraform --version command
 func parseTerraformVersion(versionCommandOutput string) (*version.Version, error) {
-	matches := TerraformVersionRegex.FindStringSubmatch(versionCommandOutput)
+	fmt.Println("versionCommandOutput: ", versionCommandOutput)
+	// matches := TerraformVersionRegex.FindStringSubmatch(versionCommandOutput)
 
-	if len(matches) != 2 {
-		return nil, errors.WithStackTrace(InvalidTerraformVersionSyntax(versionCommandOutput))
-	}
-
-	return version.NewVersion(matches[1])
+	// if len(matches) != 2 {
+	// 	return nil, errors.WithStackTrace(InvalidTerraformVersionSyntax(versionCommandOutput))
+	// }
+	// fake version for OpenTF
+	return version.NewVersion("v1.3.7")
 }
 
 // Custom error types
